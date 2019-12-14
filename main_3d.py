@@ -181,7 +181,7 @@ def train(train_loader, model, optimizer, lr_now=None, max_norm=True, is_cuda=Fa
         optimizer.step()
 
         # update the training loss
-        t_l.update(loss.cpu().data.numpy()[0] * batch_size, batch_size)
+        t_l.update(loss.cpu().data.numpy() * batch_size, batch_size)
 
         bar.suffix = '{}/{}|batch time {:.4f}s|total time{:.2f}s'.format(i+1, len(train_loader), time.time() - bt,
                                                                          time.time() - st)
