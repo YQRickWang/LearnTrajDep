@@ -238,7 +238,7 @@ def test(train_loader, model, input_n=20, output_n=50, is_cuda=False, dim_used=[
             j = eval_frame[k]
             t_3d[k] += torch.mean(torch.norm(
                 targ_p3d[:, j, :, :].contiguous().view(-1, 3) - pred_p3d[:, j, :, :].contiguous().view(-1, 3), 2,
-                1)).cpu().data.numpy()[0] * n
+                1)).cpu().data.numpy() * n
 
         N += n
 
@@ -269,7 +269,7 @@ def val(train_loader, model, is_cuda=False, dim_used=[], dct_n=15):
         m_err = loss_funcs.mpjpe_error_p3d(outputs, all_seq, dct_n, dim_used)
 
         # update the training loss
-        t_3d.update(m_err.cpu().data.numpy()[0] * n, n)
+        t_3d.update(m_err.cpu().data.numpy() * n, n)
 
         bar.suffix = '{}/{}|batch time {:.4f}s|total time{:.2f}s'.format(i+1, len(train_loader), time.time() - bt,
                                                                          time.time() - st)
